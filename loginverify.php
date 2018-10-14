@@ -4,9 +4,22 @@ $_SESSION["name"]=$_GET["name"];
 $_SESSION["pwd"]=$_GET["password"];
 $_SESSION["type"]=$_GET["type"];
 
-$name=$_GET["name"];
-$pwd=$_GET["password"];
-$type=$_GET["type"];
+function test($data)
+{
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data =  htmlspecialchars($data);
+	return $data;
+}
+
+
+$name=test($_GET["name"]);
+$pwd=test($_GET["password"]);
+$type=test($_GET["type"]);
+
+
+
+
 $conn=new mysqli("localhost:3306", "root", "", "chanakya");
 if($conn->connect_error)
 {

@@ -10,14 +10,35 @@ $name=$_SESSION["name"];
 $pwd=$_SESSION["pwd"];
 $type=$_SESSION["type"];
 
+function test($data)
+{
+    $data = trim($data)
+    $data = stripslashes($data)
+    $data =  htmlspecialchars($data)
+    return $data
+}
+
+
+
+
+
 $email = $_SESSION["email"];
 $conn=new mysqli("localhost:3306", "root", "", "chanakya");
 if($conn->connect_error)
 {
     die("connection failed".$conn->connect_error);
 }
+
+
 $s="select * from accounts where username='$name';";
 $r=$conn->query($s);
+
+$name = test($name);
+$email = test($email);
+$pwd = test($pwd);
+$type = test($type);
+
+
 if($r->num_rows )
 {
     while($row=$r->fetch_assoc())
